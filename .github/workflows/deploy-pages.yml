@@ -32,7 +32,11 @@ jobs:
         run: flutter pub get
 
       - name: Build web release
-        run: flutter build web --release
+        env:
+          REPO_NAME: ${{ github.repository }}
+        run: |
+          REPO_NAME_ONLY=$(echo "$REPO_NAME" | cut -d'/' -f2)
+          flutter build web --release --base-href="/$REPO_NAME_ONLY/"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
