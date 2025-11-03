@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../utils/app_info.dart';
 
 class AboutAppScreen extends StatelessWidget {
@@ -77,223 +75,35 @@ class AboutAppScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            /*
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Column(
               children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.15),
-                        spreadRadius: 1,
-                        blurRadius: 4,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.asset(
-                      'assets/icons/aki_icon.jpg',
-                      width: 40,
-                      height: 40,
-                      fit: BoxFit.cover,
+                  child: const ListTile(
+                    leading: Icon(Icons.account_circle, size: 32),
+                    title: Text(
+                      'Akihisa Iwata',
+                      style: TextStyle(fontWeight: FontWeight.w600),
                     ),
+                    subtitle: Text('Location Memo プロジェクト作成者'),
                   ),
                 ),
-                const SizedBox(width: 12),
-                const Text(
-                  'Akihisa Iwata',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
+                const SizedBox(height: 12),
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const ListTile(
+                    leading: Icon(Icons.account_circle, size: 32),
+                    title: Text(
+                      'Haruto Tomikawa',
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                    subtitle: Text('Location Memo オフライン版メンテナンス'),
                   ),
                 ),
-                const SizedBox(width: 16),
-                // GitHubリンク
-                GestureDetector(
-                  onTap: () async {
-                    final Uri url = Uri.parse('https://github.com/akiii2024');
-                    try {
-                      if (await canLaunchUrl(url)) {
-                        await launchUrl(url,
-                            mode: LaunchMode.externalApplication);
-                      } else {
-                        // フォールバック: デフォルトブラウザで開く
-                        await launchUrl(url, mode: LaunchMode.platformDefault);
-                      }
-                    } catch (e) {
-                      if (context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('GitHubページを開けませんでした: $e'),
-                            backgroundColor: Colors.red,
-                          ),
-                        );
-                      }
-                    }
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey.shade800
-                          : Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: SvgPicture.asset(
-                      Theme.of(context).brightness == Brightness.dark
-                          ? 'assets/icons/github-mark-white.svg'
-                          : 'assets/icons/github-mark.svg',
-                      width: 20,
-                      height: 20,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                // メールリンク
-                GestureDetector(
-                  onTap: () async {
-                    final Uri emailUri = Uri(
-                      scheme: 'mailto',
-                      path: 'example@example.com',
-                    );
-
-                    try {
-                      if (await canLaunchUrl(emailUri)) {
-                        await launchUrl(emailUri);
-                      } else {
-                        if (context.mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('メールアプリを起動できませんでした'),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
-                        }
-                      }
-                    } catch (e) {
-                      if (context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('エラーが発生しました: $e'),
-                            backgroundColor: Colors.red,
-                          ),
-                        );
-                      }
-                    }
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey.shade800
-                          : Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Icon(
-                      Icons.email,
-                      size: 20,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black87,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            */
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.15),
-                        spreadRadius: 1,
-                        blurRadius: 4,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Icon(
-                      Icons.account_circle,
-                      size: 40,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                const Text(
-                  'Haruto Tomikawa',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(width: 16),
-                // メールリンク
-                /*
-                rGestureDetector(
-                  onTap: () async {
-                    final Uri emailUri = Uri(
-                      scheme: 'mailto',
-                      path: 'example@example.com',
-                    );
-
-                    try {
-                      if (await canLaunchUrl(emailUri)) {
-                        await launchUrl(emailUri);
-                      } else {
-                        if (context.mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('メールアプリを起動できませんでした'),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
-                        }
-                      }
-                    } catch (e) {
-                      if (context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('エラーが発生しました: $e'),
-                            backgroundColor: Colors.red,
-                          ),
-                        );
-                      }
-                    }
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.grey.shade800
-                          : Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Icon(
-                      Icons.email,
-                      size: 20,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.black87,
-                    ),
-                  ),
-                ),
-                */
               ],
             ),
 
@@ -309,66 +119,23 @@ class AboutAppScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            Center(
-              child: GestureDetector(
-                onTap: () async {
-                  final Uri url =
-                      Uri.parse('https://trello.com/b/ZV0wMiZc/location-memo');
-                  try {
-                    if (await canLaunchUrl(url)) {
-                      await launchUrl(url,
-                          mode: LaunchMode.externalApplication);
-                    } else {
-                      // フォールバック: デフォルトブラウザで開く
-                      await launchUrl(url, mode: LaunchMode.platformDefault);
-                    }
-                  } catch (e) {
-                    if (context.mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Trelloページを開けませんでした: $e'),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                    }
-                  }
-                },
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF0079BF), // Trelloのブランドカラー
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.15),
-                        spreadRadius: 1,
-                        blurRadius: 4,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.dashboard, // Trelloのダッシュボードアイコン
-                        color: Colors.white,
-                        size: 24,
-                      ),
-                      const SizedBox(width: 12),
-                      const Text(
-                        '開発状況を見る',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: 'NotoSansJP',
-                        ),
-                      ),
-                    ],
-                  ),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.blueGrey.withOpacity(0.3)
+                    : Colors.blueGrey.shade50,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.blueGrey
+                      : Colors.blueGrey.shade200,
                 ),
+              ),
+              child: const Text(
+                'オフライン版ではオンラインの開発ボードへのリンクを提供していません。\n最新情報はアプリの更新履歴をご確認ください。',
+                style: TextStyle(fontSize: 14, height: 1.5),
               ),
             ),
 
