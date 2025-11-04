@@ -11,17 +11,17 @@ class AppInfo {
   /// アプリのバージョン文字列を取得
   static String get version {
     if (_packageInfo == null) {
-      return 'Unknown';
+      return 'Unknown オフライン版';
     }
-    return 'Version ${_packageInfo!.version}';
+    return 'Version ${_packageInfo!.version} オフライン版';
   }
 
   /// アプリの詳細なバージョン情報を取得
   static String get detailedVersion {
     if (_packageInfo == null) {
-      return 'Unknown';
+      return 'Unknown オフライン版';
     }
-    return 'Version ${_packageInfo!.version}';
+    return 'Version ${_packageInfo!.version} オフライン版';
   }
 
   /// アプリ名を取得

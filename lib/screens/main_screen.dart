@@ -67,8 +67,16 @@ class _MainScreenState extends State<MainScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'このアプリは現在開発中のテスト版です。',
+                    'このアプリは現在開発中のオフライン版テスト版です。',
                     style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    'オフライン版のため、インターネット接続は不要です。',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.8),
+                    ),
                   ),
                   SizedBox(height: 8),
                   Text(

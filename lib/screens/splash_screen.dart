@@ -101,6 +101,16 @@ class _SplashScreenState extends State<SplashScreen>
                   fontFamily: 'NotoSansJP',
                 ),
               ),
+              const SizedBox(height: 5),
+              Text(
+                'オフライン版',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Theme.of(context).textTheme.bodyMedium?.color,
+                  fontFamily: 'NotoSansJP',
+                ),
+              ),
               const SizedBox(height: 10),
               Text(
                 AppInfo.version,
