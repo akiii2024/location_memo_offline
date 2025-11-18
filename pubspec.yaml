@@ -2,7 +2,7 @@ name: location_memo
 description: "Offline-only build of Location Memo."
 publish_to: 'none'
 
-version: 0.2.0-alpha+2
+version: 0.2.1-alpha+1
 
 environment:
   sdk: ^3.5.0

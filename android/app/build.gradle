@@ -18,6 +18,11 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 
+def keystoreStoreFile = keystoreProperties['storeFile']
+def keystoreStorePassword = keystoreProperties['storePassword']
+def keystoreKeyAlias = keystoreProperties['keyAlias']
+def keystoreKeyPassword = keystoreProperties['keyPassword']
+
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
     flutterVersionCode = '1'
@@ -54,21 +59,25 @@ android {
         versionName = flutterVersionName
     }
 
-    signingConfigs {
-        release {
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-        }
-    }
-
     buildTypes {
         release {
-            signingConfig = signingConfigs.release
             minifyEnabled true
             shrinkResources true
         }
+    }
+}
+
+afterEvaluate {
+    if (keystoreStoreFile) {
+        android.signingConfigs {
+            release {
+                storeFile file(keystoreStoreFile)
+                storePassword keystoreStorePassword
+                keyAlias keystoreKeyAlias
+                keyPassword keystoreKeyPassword
+            }
+        }
+        android.buildTypes.release.signingConfig = android.signingConfigs.release
     }
 }
 
