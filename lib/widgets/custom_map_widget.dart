@@ -298,9 +298,8 @@ class CustomMapWidgetState extends State<CustomMapWidget> {
         // iOS PWA タッチ反応問題を解決するため、タッチ動作を最適化
         behavior: HitTestBehavior.opaque,
         onTapDown: (details) {
-          // タップ位置を地図座標に変換
-          final RenderBox renderBox = context.findRenderObject() as RenderBox;
-          final localPosition = renderBox.globalToLocal(details.globalPosition);
+          // タップ位置をこのGestureDetector内のローカル座標として取得
+          final Offset localPosition = details.localPosition;
 
           // まず、タップ位置が画像表示領域内かどうかを確認
           if (localPosition.dx < _offsetX ||
@@ -310,27 +309,17 @@ class CustomMapWidgetState extends State<CustomMapWidget> {
             return; // 画像外のタップは無視
           }
 
-          // 画像表示領域内の相対座標を計算（ズーム・パン変換前）
+          // 画像表示領域内のローカル座標を計算（InteractiveViewerのズーム・パン前の座標系）
           final Offset imageLocalPosition = Offset(
             localPosition.dx - _offsetX,
             localPosition.dy - _offsetY,
           );
 
-          // InteractiveViewerの変換を適用
-          final Matrix4 matrix = _transformationController.value;
-          final Matrix4? invertedMatrix = Matrix4.tryInvert(matrix);
-          if (invertedMatrix == null) return;
-
-          // 画像表示領域を基準とした座標で変換
-          final Offset transformedPosition = MatrixUtils.transformPoint(
-            invertedMatrix,
-            imageLocalPosition,
-          );
-
           // 相対座標（0.0〜1.0）に変換
-          final double relativeX = transformedPosition.dx / _actualDisplayWidth;
+          final double relativeX =
+              imageLocalPosition.dx / _actualDisplayWidth;
           final double relativeY =
-              transformedPosition.dy / _actualDisplayHeight;
+              imageLocalPosition.dy / _actualDisplayHeight;
 
           // 範囲チェック - 正規化座標が有効範囲内かを確認
           if (relativeX >= 0.0 &&
@@ -420,8 +409,9 @@ class CustomMapWidgetState extends State<CustomMapWidget> {
                               _getPinNumberFontSize();
 
                           return Positioned(
+                            // タップした位置（保存した座標）にピンの「中心」が来るように配置する
                             left: pinX - pinSize / 2,
-                            top: pinY - pinSize,
+                            top: pinY - pinSize / 2,
                             child: GestureDetector(
                               // iOS PWA タッチ反応問題を解決するため、タッチ動作を最適化
                               behavior: HitTestBehavior.opaque,
