@@ -273,6 +273,7 @@ class PrintHelper {
                 color: Colors.white,
                 fontSize: fontSize,
                 fontWeight: FontWeight.bold,
+                fontFamily: 'NotoSansJP', // 日本語フォントを指定
               ),
             ),
             textDirection: TextDirection.ltr,
